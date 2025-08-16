@@ -96,7 +96,7 @@ header h1 {
   word-wrap: break-word;
 }
 
-@media (min-width: 768px) {
+@media (min-width: calc(768 / 16 * 1rem)) {
   body {
     padding-top: 10rem;
   }
