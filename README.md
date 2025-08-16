@@ -1,96 +1,180 @@
-# Frontend Mentor - FAQ accordion
+# Frontend Mentor - FAQ accordion solution
 
-![Design preview for the FAQ accordion coding challenge](preview.jpg)
+This is a solution to the
+[FAQ accordion challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/faq-accordion-wyfFdeBwBz).
+Frontend Mentor challenges help you improve your coding skills by building
+realistic projects.
 
-## Welcome! 👋
+## Table of contents
 
-Thanks for checking out this front-end coding challenge.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+## Overview
 
-**To do this challenge, you need a basic understanding of HTML, CSS and JavaScript.**
+### The challenge
 
-## The challenge
-
-Your challenge is to build out this FAQ accordion and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-Your users should be able to:
+Users should be able to:
 
 - Hide/Show the answer to a question when the question is clicked
 - Navigate the questions and hide/show answers using keyboard navigation alone
-- View the optimal layout for the interface depending on their device's screen size
+- View the optimal layout for the interface depending on their device's screen
+  size
 - See hover and focus states for all interactive elements on the page
 
-Want some support on the challenge? [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+### Screenshot
 
-## Where to find everything
+![FAQ Accordion Screenshot](./preview.png)
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design.
+### Links
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`.
+- Solution URL:
+  [GitHub Repository](https://github.com/yourusername/fem-faq-accordion)
+- Live Site URL: [Live Demo](https://yourusername.github.io/fem-faq-accordion)
 
-If you would like the Figma design file to inspect the design in more detail, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+## My process
 
-All the required assets for this project are in the `/assets` folder. The images are already exported for the correct screen size and optimized.
+### Built with
 
-We also include variable and static font files for the required fonts for this project. You can choose to either link to Google Fonts or use the local font files to host the fonts yourself. Note that we've removed the static font files for the font weights that aren't needed for this project.
+- Semantic HTML5 markup
+- CSS custom properties (CSS variables)
+- CSS Grid for accordion prompt layout
+- Flexbox for overall layout
+- Mobile-first workflow
+- Vanilla JavaScript for interactions
+- CSS transitions and animations
+- ARIA attributes for accessibility
+- Work Sans font family
+- Responsive design with rem units
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+### What I learned
 
-## Building your project
+This project taught me several important concepts about building accessible and
+responsive components:
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+**Semantic HTML for Accordions:**
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+```html
+<button class="accordion__item--prompt" aria-expanded="true" id="faq-1">
+  What is Frontend Mentor, and how will it help me?
+  <img class="toggle" src="assets/images/icon-minus.svg" alt="Toggle answer" />
+</button>
+<div class="accordion__item--response" role="region" aria-labelledby="faq-1">
+  <p>Frontend Mentor offers realistic coding challenges...</p>
+</div>
+```
 
-## Deploying your project
+**CSS Grid for Perfect Button Layout:**
 
-As mentioned above, there are many ways to host your project for free. Our recommend hosts are:
+```css
+.accordion__item--prompt {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+}
+```
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+**Smooth Height Transitions:**
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
+```css
+.accordion__item--response {
+  max-height: 200px;
+  opacity: 1;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out,
+    padding 0.3s ease-out;
+}
 
-## Create a custom `README.md`
+.hidden {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  padding-block: 0 !important;
+  transition: max-height 0.4s ease-in, opacity 0.4s ease-in,
+    padding 0.4s ease-in;
+}
+```
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+**Accessible JavaScript Interactions:**
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+```js
+function toggleAccordion(button) {
+  const accordionItem = button.closest(".accordion__item");
+  const response = accordionItem.querySelector(".accordion__item--response");
+  const toggleIcon = button.querySelector(".toggle");
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+  const isHidden = response.classList.toggle("hidden");
+  button.setAttribute("aria-expanded", !isHidden);
 
-## Submitting your solution
+  if (isHidden) {
+    toggleIcon.src = "assets/images/icon-plus.svg";
+    toggleIcon.alt = "Expand answer";
+  } else {
+    toggleIcon.src = "assets/images/icon-minus.svg";
+    toggleIcon.alt = "Collapse answer";
+  }
+}
+```
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
+**Responsive Background Images:**
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+```css
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: calc(320 / 16 * 1rem);
+  background-image: url(../assets/images/background-pattern-mobile.svg);
+  background-size: cover;
+  z-index: -1;
+}
 
-## Sharing your solution
+@media (min-width: calc(768 / 16 * 1rem)) {
+  body::before {
+    background-image: url(../assets/images/background-pattern-desktop.svg);
+  }
+}
+```
 
-There are multiple places you can share your solution:
+### Continued development
 
-1. Share your solution page in the **#finished-projects** channel of our [community](https://www.frontendmentor.io/community).
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
+Areas I want to continue focusing on in future projects:
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback.
+- **Advanced CSS animations** - Exploring more complex transition effects and
+  micro-interactions
+- **CSS Container Queries** - Using modern responsive design techniques for
+  component-based layouts
+- **Web Components** - Building reusable accordion components with custom
+  elements
+- **Performance optimization** - Implementing lazy loading and optimizing for
+  Core Web Vitals
+- **Advanced accessibility** - Exploring screen reader testing and complex ARIA
+  patterns
 
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
+### Useful resources
 
-## Got feedback for us?
+- [ARIA Authoring Practices Guide - Accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) -
+  Essential reference for proper accordion accessibility implementation
+- [CSS Tricks - Animating Height](https://css-tricks.com/using-css-transitions-auto-dimensions/) -
+  Helped me understand the challenges and solutions for animating height
+  transitions
+- [MDN Web Docs - CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) -
+  Comprehensive guide that helped me implement the perfect button layout
+- [WebAIM - Keyboard Accessibility](https://webaim.org/techniques/keyboard/) -
+  Crucial resource for implementing proper keyboard navigation
 
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
+## Author
 
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀
+- Website -
+  [Kevin Jones-Eastland | Eastland Jones Creative](https://eastlandjones.com/)
+- Frontend Mentor - [@kmje405](https://www.frontendmentor.io/profile/kmje405)
+- GitHub - [@yourusername](https://github.com/kmje405)
