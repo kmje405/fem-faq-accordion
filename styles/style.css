@@ -1,0 +1,190 @@
+@font-face {
+  font-family: "Work Sans";
+  src: url(../assets/fonts/static/WorkSans-Bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url(../assets/fonts/static/WorkSans-SemiBold.ttf) format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Work Sans";
+  src: url(../assets/fonts/static/WorkSans-Regular.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --c-white: hsl(0 0% 100%);
+  --c-black: hsl(0 0% 0%);
+  --c-purple-950: hsl(292 42% 14%);
+  --c-purple-600: hsl(292 16% 49%);
+  --c-purple-100: hsl(275 100% 97%);
+  --c-violet-600: hsl(281 83% 54%);
+}
+body {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+  background-color: var(--c-purple-100);
+  background-image: url(../assets/images/background-pattern-mobile.svg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 8rem;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  font-size: calc(32 / 16 * 1rem);
+}
+.hidden {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  padding-block: 0 !important;
+  transition: max-height 0.4s ease-in, opacity 0.4s ease-in,
+    padding 0.4s ease-in;
+}
+
+/* Utility class for testing - can be removed in production */
+.red,
+.red p {
+  color: red !important;
+}
+
+/* Performance optimization */
+.accordion__item--response {
+  will-change: max-height, opacity, padding;
+}
+
+.accordion__item--response.hidden {
+  will-change: auto;
+}
+.wrapper {
+  padding: 1.5rem;
+  background-color: var(--c-white);
+  border-radius: calc(8 / 16 * 1rem);
+  width: calc(100% - 6rem);
+  max-width: calc(327 / 16 * 1rem);
+  margin: 1.5rem;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url(../assets/images/background-pattern-desktop.svg);
+    background-size: 100% auto;
+    padding-top: 10rem;
+  }
+
+  .wrapper {
+    padding: 2.5rem;
+    margin: 2rem;
+    width: calc(100% - 4rem);
+    max-width: calc(600 / 16 * 1rem);
+  }
+}
+.accordion__item {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-bottom: 1px solid var(--c-purple-100);
+}
+.accordion__item:last-child {
+  border-bottom: none;
+}
+
+.accordion__item--prompt {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: calc(21 / 16 * 1rem);
+  gap: 1.5rem;
+  min-height: fit-content;
+  width: 100%;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  transition: color 0.2s ease;
+  /* Ensure button is focusable despite CSS reset */
+  -webkit-appearance: button;
+  appearance: button;
+}
+
+/* Override CSS reset for buttons to maintain focusability */
+button.accordion__item--prompt {
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+}
+
+.accordion__item--prompt:hover {
+  color: var(--c-violet-600);
+}
+
+.accordion__item--prompt:focus {
+  outline: 2px solid var(--c-violet-600);
+  outline-offset: 2px;
+}
+
+.accordion__item--prompt .toggle {
+  justify-self: end;
+  transition: transform 0.2s ease;
+  pointer-events: none;
+}
+
+.accordion__item--prompt:hover .toggle {
+  transform: scale(1.1);
+}
+
+.accordion__item:has(.accordion__item--response.hidden)
+  .accordion__item--prompt {
+  padding-block: 1.5rem;
+}
+
+.accordion__item--response {
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+  line-height: 150%;
+  padding-block: 1.5rem;
+  max-height: 200px;
+  opacity: 1;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, opacity 0.3s ease-out,
+    padding 0.3s ease-out;
+}
+
+.accordion__item--response p {
+  font-family: "Work Sans", sans-serif;
+  color: var(--c-purple-600);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
