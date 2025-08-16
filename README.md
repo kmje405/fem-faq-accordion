@@ -37,7 +37,7 @@ Users should be able to:
 ### Links
 
 - Solution URL:
-  [GitHub Repository](https://github.com/yourusername/fem-faq-accordion)
+  [GitHub Repository](https://github.com/kmje405/fem-faq-accordion)
 - Live Site URL: [Live Demo](https://yourusername.github.io/fem-faq-accordion)
 
 ## My process
