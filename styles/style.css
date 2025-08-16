@@ -76,12 +76,6 @@ header h1 {
     padding 0.4s ease-in;
 }
 
-/* Utility class for testing - can be removed in production */
-.red,
-.red p {
-  color: red !important;
-}
-
 /* Performance optimization */
 .accordion__item--response {
   will-change: max-height, opacity, padding;
